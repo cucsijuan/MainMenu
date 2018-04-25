@@ -45,3 +45,11 @@ void UPuzzlePlatformsGameInstance::Join(const FString & Address)
 	PlayerController->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
 
 }
+
+void UPuzzlePlatformsGameInstance::LoadMenu()
+{
+	if (!ensure(MenuClass != nullptr)) return;
+	UUserWidget * Menu = CreateWidget<UUserWidget>(this, MenuClass);
+	if (!ensure(Menu != nullptr)) return;
+	Menu->AddToViewport();
+}
