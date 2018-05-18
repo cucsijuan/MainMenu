@@ -8,7 +8,7 @@
 
 UPuzzlePlatformsGameInstance::UPuzzlePlatformsGameInstance(const FObjectInitializer & ObjectIntializer)
 {
-	static ConstructorHelpers::FClassFinder<UUserWidget> MainMenuBPClass(TEXT("/Game/MainMenuSystem/WBP_MainMenu"));
+	static ConstructorHelpers::FClassFinder<UUserWidget> MainMenuBPClass(TEXT("/Game/MenuSystem/WBP_MainMenu"));
 	if (!ensure(MainMenuBPClass.Class != nullptr)) return;
 
 	MenuClass = MainMenuBPClass.Class;
