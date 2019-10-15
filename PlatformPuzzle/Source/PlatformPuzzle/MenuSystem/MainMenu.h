@@ -15,7 +15,10 @@ class PLATFORMPUZZLE_API UMainMenu : public UUserWidget
 {
 	GENERATED_BODY()
 public:
-	void SetMenuInterface(IMenuInterface * MenuInterface);
+	void SetMenuInterface(IMenuInterface * InMenuInterface);
+
+	void Setup();
+	void Teardown();
 
 protected:
 	virtual bool Initialize() override;
