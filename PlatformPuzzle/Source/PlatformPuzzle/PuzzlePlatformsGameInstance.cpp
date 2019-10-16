@@ -87,3 +87,12 @@ void UPuzzlePlatformsGameInstance::InGameLoadMenu()
 
 	MenuInGame->SetMenuInterface(this);
 }
+
+void UPuzzlePlatformsGameInstance::LoadMainMenu()
+{
+	APlayerController * PlayerController = GetFirstLocalPlayerController();
+
+	if (!ensure(PlayerController != nullptr)) return;
+
+	PlayerController->ClientTravel("/Game/MenuSystem/MainMenu", ETravelType::TRAVEL_Absolute);
+}
