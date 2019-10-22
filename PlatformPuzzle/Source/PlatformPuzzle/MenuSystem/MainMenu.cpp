@@ -4,6 +4,7 @@
 #include "Components/Button.h"
 #include "Components/WidgetSwitcher.h"
 #include "Components/EditableTextBox.h"
+#include "Components/TextBlock.h"
 #include "ConstructorHelpers.h"
 #include "ServerRow.h"
 #include "UserWidget.h"
@@ -16,6 +17,26 @@ UMainMenu::UMainMenu(const FObjectInitializer & ObjectIntializer)
 	ServerRowClass = ServerRowBPClass.Class;
 
 }
+
+void UMainMenu::SetServerList(TArray<FString> ServerNames)
+{
+	UWorld* World = this->GetWorld();
+	if (!ensure(World != nullptr)) return;
+
+	ServerList->ClearChildren();
+
+	for (const FString& ServerName : ServerNames)
+	{
+		UServerRow* Row = CreateWidget<UServerRow>(World, ServerRowClass);
+		if (!ensure(Row != nullptr)) return;
+
+		Row->ServerName->SetText(FText::FromString(ServerName));
+
+		ServerList->AddChild(Row);
+	}
+	
+}
+
 bool UMainMenu::Initialize()
 {
 	bool Success = Super::Initialize();
@@ -53,16 +74,8 @@ void UMainMenu::JoinServer()
 	{
 		/*if (!ensure(IPAddressField != nullptr)) return;
 
-		FString Address = IPAddressField->GetText().ToString();
-		MenuInterface->Join(Address);*/
-		UWorld* World = this->GetWorld();
-		if (!ensure(World != nullptr)) return;
-
-		UServerRow* Row = CreateWidget<UServerRow>(World, ServerRowClass);
-		if (!ensure(Row != nullptr)) return;
-
-		ServerList->AddChild(Row);
-
+		FString Address = IPAddressField->GetText().ToString();*/
+		MenuInterface->Join("");
 	}
 }
 
@@ -72,6 +85,11 @@ void UMainMenu::OpenJoinMenu()
 	if (!ensure(JoinMenu != nullptr)) return;
 
 	MenuSwitcher->SetActiveWidget(JoinMenu);
+
+	if (MenuInterface != nullptr)
+	{
+		MenuInterface->RefreshServerList();
+	}
 }
 
 void UMainMenu::OpenMainMenu()
