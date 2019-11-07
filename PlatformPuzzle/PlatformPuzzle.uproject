@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "4.22",
+	"EngineAssociation": "{1940F4AA-498A-8585-F99B-E5A162E6AEE2}",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -12,6 +12,12 @@
 				"Engine",
 				"UMG"
 			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "OnlineSubsystemSteam",
+			"Enabled": true
 		}
 	]
 }
