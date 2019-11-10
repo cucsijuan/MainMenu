@@ -18,19 +18,23 @@ UMainMenu::UMainMenu(const FObjectInitializer & ObjectIntializer)
 
 }
 
-void UMainMenu::SetServerList(TArray<FString> ServerNames)
+void UMainMenu::SetServerList(TArray<FServerData> ServerNames)
 {
 	UWorld* World = this->GetWorld();
 	if (!ensure(World != nullptr)) return;
 
 	ServerList->ClearChildren();
+
 	uint32 i = 0;
-	for (const FString& ServerName : ServerNames)
+	for (const FServerData& ServerData : ServerNames)
 	{
 		UServerRow* Row = CreateWidget<UServerRow>(World, ServerRowClass);
 		if (!ensure(Row != nullptr)) return;
 
-		Row->ServerName->SetText(FText::FromString(ServerName));
+		Row->ServerName->SetText(FText::FromString(ServerData.Name));
+		Row->HostUser->SetText(FText::FromString(ServerData.HostUsername));
+		FString FractionText = FString::Printf(TEXT("%d/%d"), ServerData.CurrentPlayers, ServerData.MaxPlayers);
+		Row->ConnectionFraction->SetText(FText::FromString(FractionText));
 		Row->Setup(this, i);
 		++i;
 
