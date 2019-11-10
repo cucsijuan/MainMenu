@@ -70,4 +70,5 @@ private:
 	UFUNCTION()
 	void QuitPressed();
 	
+	void UpdateChildren();
 };
