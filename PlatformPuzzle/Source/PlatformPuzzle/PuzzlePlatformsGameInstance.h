@@ -24,7 +24,7 @@ public:
 	virtual void Init();
 
 	UFUNCTION(Exec)
-	void Host() override;
+	void Host(FString ServerName) override;
 
 	UFUNCTION(Exec)
 	void Join(uint32 index) override;
@@ -41,6 +41,8 @@ public:
 	virtual void RefreshServerList() override;
 
 private:
+	FString DesiredServerName;
+	
 	TSubclassOf<class UUserWidget> MenuClass;
 
 	TSubclassOf<class UUserWidget> InGameMenuClass;
