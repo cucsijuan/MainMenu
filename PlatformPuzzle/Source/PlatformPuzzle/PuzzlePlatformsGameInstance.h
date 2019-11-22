@@ -35,6 +35,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void InGameLoadMenu();
 
+	void StartSession();
+
 	virtual void LoadMainMenu() override;
 
 
